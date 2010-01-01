@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{xmlrpc-endpoint}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Will Koffel"]
@@ -21,10 +21,19 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "doc/created.rid",
+     "doc/files/README_rdoc.html",
+     "doc/fr_class_index.html",
+     "doc/fr_file_index.html",
+     "doc/fr_method_index.html",
+     "doc/index.html",
+     "doc/rdoc-style.css",
      "init.rb",
      "lib/action_controller/acts/xmlrpc_endpoint.rb",
+     "lib/xmlrpc-endpoint.rb",
      "test/helper.rb",
-     "test/test_xmlrpc-endpoint.rb"
+     "test/test_xmlrpc-endpoint.rb",
+     "xmlrpc-endpoint.gemspec"
   ]
   s.homepage = %q{http://github.com/wkoffel/xmlrpc-endpoint}
   s.rdoc_options = ["--charset=UTF-8"]
