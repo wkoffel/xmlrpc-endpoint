@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "xmlrpc-endpoint"
-    gem.summary = %Q{Expose Rails Controller actions as XMLRPC method calls.}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Expose Rails controller actions as XMLRPC method calls.}
+    gem.description = %Q{Expose Rails controller actions as XMLRPC method calls.}
     gem.email = "wkoffel@alum.mit.edu"
     gem.homepage = "http://github.com/wkoffel/xmlrpc-endpoint"
     gem.authors = ["Will Koffel"]
