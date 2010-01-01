@@ -14,4 +14,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2009 Will Koffel. See LICENSE for details.
+Copyright (c) 2010 Will Koffel, released under the MIT license.
