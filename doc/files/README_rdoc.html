@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Fri Jan 01 15:19:02 -0500 2010</td>
+      <td>Fri Jan 01 16:09:48 -0500 2010</td>
     </tr>
     </table>
   </div>
@@ -77,36 +77,71 @@ library examples mostly make an assumption that you will run a standalone
 server.
 </p>
 <p>
-xmlrpc-endpoint allows you to expose normal Rails controller methods via
-XMLRPC, tied to a single xmlrpc endpoint route in your normal app.
+xmlrpc-endpoint allows you to instead expose normal Rails controller
+methods via XMLRPC, tied to an xmlrpc endpoint route in your app.
 </p>
+<p>
+Install
+</p>
+<pre>
+  gem install xmlrpc-endpoint
+  config.gem &quot;xmlrpc-endpoint&quot; (inside environment.rb Rails::Initializer block)
+            -- OR --
+  ./script/plugin install git://github.com/wkoffel/xmlrpc-endpoint.git
+</pre>
 <p>
 Setup your environment
 </p>
-<ul>
-<li>gem install xmlrpc-endpoint
+<pre>
+  # set up a route to the action &quot;xe_index&quot; in your controller
+  # (this &quot;xe_index&quot; action will be created for you by the xmlrpc-endpoint, the route must point at 'xe_index' action to work)
+  # In a future release, xmlrpc-endpoint may support auto-generation of this route, and customization
 
-</li>
-<li>include ActionController::Acts::XmlrpcEndpoint somewhere in your
-environment
-
-</li>
-<li>set up a route to the action &quot;index&quot; in your controller (this
-action will be created for you by the xmlrpc-endpoint)
-
-</li>
-</ul>
+  map.connect 'api/xmlrpc', :controller =&gt; 'my_api_controller', :action =&gt; 'xe_index'
+</pre>
 <p>
 Add this code to your controller:
 </p>
 <pre>
   class MyApiController &lt; ApplicationController
     exposes_xmlrpc_methods
+
+    def hello_world
+      puts &quot;Hello XMLRPC.&quot;
+    end
   end
 </pre>
 <p>
 Then, pointing an XMLRPC client at the defined route, your normal
 controller actions will handle the requests.
+</p>
+<pre>
+  require 'xmlrpc/client'
+  server = XMLRPC::Client.new2(&quot;http://localhost:3000/api/xmlrpc&quot;)
+  server.call(&quot;hello_world&quot;)
+</pre>
+<p>
+To use a custom namespace prefix on all exposed methods (for example, if
+using someone else&#8216;s specified protocol like <a
+href="http://www.xmlrpc.com/metaWeblogApi">MetaWeblog</a>), declare a
+method_prefix:
+</p>
+<pre>
+  class MyApiController &lt; ApplicationController
+    exposes_xmlrpc_methods :method_prefix =&gt; &quot;metaWeblog.&quot;
+
+    # This method will be exposed externally as &quot;metaWeblog.newPost()&quot;
+    def newPost(blogid, username, password, struct, publish)
+    ...
+    end
+
+    etc.
+  end
+</pre>
+<p>
+Thanks to Nathan Crause for saving me some time on the details of avoiding
+the standalone server. <a
+href="http://nathan.crause.name/entries/programming/xlm-rpc-under-ruby-on-rails">nathan.crause.name/entries/programming/xlm-rpc-under-ruby-on-rails</a>
 </p>
 <h2>Note on Patches/Pull Requests</h2>
 <ul>
