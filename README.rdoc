@@ -1,6 +1,24 @@
 = xmlrpc-endpoint
 
-Description goes here.
+Rails has native support for xmlrpc.  Most people are familiar with the 'xmlrpc/client' library.  The 'xmlrpc/server' library examples mostly make an assumption that you will run a standalone server.
+
+xmlrpc-endpoint allows you to expose normal Rails controller methods via XMLRPC, tied to a single xmlrpc endpoint route in your normal app.
+
+Setup
+<tt>
+  gem install xmlrpc-endpoint
+  include ActionController::Acts::XmlrpcEndpoint somewhere in your environment
+  set up a route to the action "index" in your controller (this action will be created for you by the xmlrpc-endpoint)
+</tt>
+
+Code
+<tt>
+class MyApiController < ApplicationController
+  exposes_xmlrpc_methods
+end
+</tt>
+
+Then, pointing an XMLRPC client at the defined route, your normal controller actions will handle the requests.
 
 == Note on Patches/Pull Requests
  
