@@ -49,6 +49,12 @@ To use a custom namespace prefix on all exposed methods (for example, if using s
 Thanks to Nathan Crause for saving me some time on the details of avoiding the standalone server.
 http://nathan.crause.name/entries/programming/xlm-rpc-under-ruby-on-rails
 
+== Notes and Gotchas
+
+* Be aware that Rails XMLRPC is finnicky about marshalling 'nil' values across the wire.
+* To have an object marshalled correctly, you need to include XMLRPC::Marshallable in the object class, and be sure that all the instance variables are also marshallable.
+* ActiveRecord objects hide their instance variables behind the single @attributes hash (confirm with activerecord_obj.instance_variables, you'll see only two, @attributes and @attributes_cache).  This means that AR objects might not end up in object format you'd expect if you simply include Marshallable.  Be aware if you don't own both ends of the API in question.
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
